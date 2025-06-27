@@ -1,0 +1,15 @@
+    RewriteEngine On
+    
+    # # Prevent access to sensitive files
+    # RewriteCond %{REQUEST_URI} !^/public/
+    # RewriteRule ^(.*)$ public/$1 [L]
+    RewriteRule ^(config) - [F,L]
+    
+    # # Redirect everything to index.php except for existing files
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L] 
